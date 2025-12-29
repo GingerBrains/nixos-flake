@@ -1,0 +1,128 @@
+{ config, pkgs, ... }:
+{
+  # Home Manager needs a bit of information about you and the paths it should
+  # manage.
+  home.username = "laurel";
+  home.homeDirectory = "/home/laurel";
+
+  # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  # The home.packages option allows you to install Nix packages into your
+  # environment.
+    nixpkgs.config.allowUnfree = true;
+   
+    home.packages = with pkgs; [
+    btop
+    nextcloud-client
+    pcmanfm
+    unzipNLS
+    bat
+    tmux
+    neofetch
+    code-cursor
+    hyprcursor
+    rose-pine-hyprcursor
+    gitkraken
+    mpv
+    papirus-icon-theme
+    dracula-theme
+    hyprshot
+    image-roll
+    jdk
+    brightnessctl
+    claude-code
+    starship
+    docker
+    obsidian
+    copyq
+    discord
+  ];
+
+
+  gtk = {
+    enable = true;
+    theme = {
+        name = "Dracula";
+        package = pkgs.dracula-theme;
+    };
+    iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+    };
+  };
+
+  programs.firefox.enable = true;
+
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      nrs = "sudo nixos-rebuild switch --impure --flake /home/laurel/nixos-flakes";
+      nfu = "nix flake update";
+    };
+  };
+
+  programs.alacritty = {
+  enable = true;
+  settings = {
+    window = {
+      opacity = 0.9;
+    };
+    font = {
+      normal = {
+        family = "JetBrains Mono";
+        style = "Regular";
+      };
+      size = 16;
+    };
+    terminal = {
+      shell = {
+        program = "/run/current-system/sw/bin/bash";
+        args = [ "--login" ];
+      };
+    };
+  };
+};
+
+  # Home Manager is pretty good at managing dotfiles. The primary way to manage
+  # plain files is through 'home.file'.
+  home.file = {
+    ".config/dunst".source = ./config/dunst;
+    ".config/hypr".source = ./config/hypr;
+    ".config/nvim".source = ./config/nvim;
+    ".config/pcmanfm".source = ./config/pcmanfm;
+    ".config/rofi".source = ./config/rofi;
+    ".config/tmux".source = ./config/tmux;
+    ".config/waybar".source = ./config/waybar;
+  };
+
+  # Home Manager can also manage your environment variables through
+  # 'home.sessionVariables'. These will be explicitly sourced when using a
+  # shell provided by Home Manager. If you don't want to manage your shell
+  # through Home Manager then you have to manually source 'hm-session-vars.sh'
+  # located at either
+  #
+  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  /etc/profiles/per-user/laurel/etc/profile.d/hm-session-vars.sh
+  #
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    HYPRSHOT_DIR = "/home/laurel/Pictures/Screenshots";
+  };
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+}

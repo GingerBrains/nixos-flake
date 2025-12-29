@@ -1,0 +1,80 @@
+# Ashell Configuration - Recreated from Waybar
+# Based on your waybar config with equivalent functionality
+
+[bar]
+height = 30
+background = "rgba(8, 18, 47, 0.85)"
+border-radius = 5
+border-bottom = "2px solid #8A417E"
+margin-top = 5
+margin-left = 5
+margin-right = 5
+spacing = 3
+
+[bar.font]
+family = "JetBrainsMono Nerd Font"
+size = 16
+
+# Left modules: Workspaces and Window
+[[bar.left]]
+type = "workspaces"
+format = "{name}"
+format-icons = { "1" = "1", "2" = "2", "3" = "3", "4" = "4", "5" = "5", "urgent" = "!", "focused" = "●", "default" = "○" }
+disable-scroll = true
+all-outputs = true
+warp-on-scroll = false
+
+[[bar.left]]
+type = "window"
+max-length = 50
+format = "{}"
+
+# Center modules: Clock
+[[bar.center]]
+type = "clock"
+timezone = "Europe/Dublin"
+format = " {:%H:%M} "
+format-alt = " {:%Y-%m-%d %H:%M:%S} "
+tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+
+# Right modules: Media, Audio, Battery, Tray
+[[bar.right]]
+type = "custom"
+exec = "~/.config/ashell/media_info.sh"
+format = "{}"
+return-type = "json"
+max-length = 40
+escape = true
+on-click = "playerctl play-pause"
+on-click-right = "playerctl stop"
+on-scroll-up = "playerctl next"
+on-scroll-down = "playerctl previous"
+
+[[bar.right]]
+type = "pulseaudio"
+format = "{volume}% {icon}"
+format-bluetooth = "{volume}% {icon}󰂯"
+format-bluetooth-muted = "󰖁 {icon}󰂯"
+format-muted = "󰖁"
+format-source = "  {volume}% 󰋋"
+format-source-muted = " 󰍭"
+format-icons = { "headphone" = "󰋎", "hands-free" = "󰖐", "headset" = "󰋎", "phone" = "󰂕", "portable" = "󰂕", "car" = "󰆹", "default" = ["󰖀", "󰕾", "󰕿"] }
+on-click = "pavucontrol"
+
+[[bar.right]]
+type = "battery"
+format = "{capacity}% {icon}"
+format-charging = "{capacity}% 󰂄"
+format-plugged = "{capacity}% 󰂄"
+tooltip = true
+tooltip-format = "{timeTo}\nPower: {power}w"
+states = { "warning" = 30, "critical" = 15 }
+interval = 5
+format-icons = ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+
+[[bar.right]]
+type = "tray"
+icon-size = 21
+spacing = 10
+
+

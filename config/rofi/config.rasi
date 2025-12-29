@@ -1,0 +1,66 @@
+* {
+    font: "JetBrainsMono Nerd Font 12";
+    text-color: #ffffff;
+    background-color: #3b3479;
+    border: 0;
+    accent: #cf7cc7; /* french mauve */
+}
+
+window {
+    location: center;
+    width: 40%;
+    border-radius: 8px;
+    background-color: rgba(59, 52, 121, 0.6); /* tekhelet */
+    border: 2px;
+    border-color: @accent;
+    padding: 12px;
+}
+
+configuration {
+    show-icons: true;
+    drun-display-format: "{icon} {name}";
+}
+
+mainbox {
+    spacing: 10px;
+    padding: 10px;
+}
+
+inputbar {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: rgba(103, 90, 210, 0.5); /* slate blue */
+    text-color: #ffffff;
+}
+
+listview {
+    padding: 6px;
+    columns: 1;
+    spacing: 4px;
+    scrollbar: false;
+}
+
+element {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: transparent;
+    text-color: #ffffff;
+}
+
+element selected {
+    background-color: rgba(207, 124, 199, 0.8); /* french mauve */
+    text-color: #1e1e2e;
+}
+
+element urgent {
+    background-color: rgba(163, 103, 205, 0.8); /* amethyst */
+}
+
+element active {
+    background-color: rgba(92, 62, 133, 0.8); /* rebecca purple */
+}
+
+* {
+    accent: #cf7cc7; /* french mauve */
+}
+
