@@ -93,8 +93,10 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".config/btop".source = ./config/btop;
     ".config/dunst".source = ./config/dunst;
     ".config/hypr".source = ./config/hypr;
+    ".config/neofetch".source = ./config/neofetch;
     ".config/nvim".source = ./config/nvim;
     ".config/pcmanfm".source = ./config/pcmanfm;
     ".config/rofi".source = ./config/rofi;
